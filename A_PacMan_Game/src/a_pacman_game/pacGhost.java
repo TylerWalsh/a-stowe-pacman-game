@@ -12,34 +12,36 @@ import java.awt.Color;
  *
  * @author David Fryer
  */
-public class pacGhost extends Bug implements MovementInterface {
+public abstract class pacGhost extends Bug {
 
-    private Location targetLocation;
-
-    public pacGhost() {
-        super(Color.BLUE);
-        setDirection(Location.EAST);
-    }
-
-    public pacGhost(Color c) {
-        super(c);
-        setDirection(Location.EAST);
-    }
-
-    public void step() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void step(String direction) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    protected Location target;
+    protected String mode;
+    private final String CHASE = "CHASE";
+    private final String SCATTER = "SCATTER";
 
     public void act() {
-        if (!canMove()) {
-            turn();
-            turn();
-        } else {
-            moveTo(getLocation().getAdjacentLocation(getDirection()));
-        }
+        
     }
+    
+    private void setMode() {
+        
+    }
+    
+    private boolean getPacManLives() {
+        
+    }
+    
+    private boolean checkGameFinished() {
+        
+    }
+    
+    private void moveTowardTarget() {
+        
+    }
+    
+    private boolean eatPacMan() {
+        
+    }
+    
+    protected abstract void setTarget();
 }
