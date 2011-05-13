@@ -18,6 +18,9 @@ public class pacMan extends Bug implements MovementInterface {
 
     private static int numFlowers;
 
+    /**
+     * constuctor makes a yellow pacman
+     */
     public pacMan() {
         super(Color.YELLOW);
         setDirection(Location.EAST);
