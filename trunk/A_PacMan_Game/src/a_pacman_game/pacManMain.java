@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package a_pacman_game;
 
 import info.gridworld.actor.Flower;
@@ -27,11 +26,14 @@ public class pacManMain {
         pacWorld.add(new Location(11, 9), pacman);
         pacWorld.show();
         makeBounds(pacWorld);
+        //add all other actors FIRST, otherwise you will get
+        //the wrong flower count
         for (int r = 0; r < pacWorld.getGrid().getNumRows(); r++) {
             for (int c = 0; c < pacWorld.getGrid().getNumCols(); c++) {
                 Location l = new Location(r, c);
                 if (pacWorld.getGrid().get(l) == null) {
                     pacWorld.add(l, new Flower(Color.YELLOW));
+                    pacMan.setNumFlowers();
                 }
             }
         }
@@ -41,7 +43,7 @@ public class pacManMain {
      * Adds the boundaries to the world.
      * @param pacWorld
      */
-    private static void makeBounds(World pacWorld){
+    private static void makeBounds(World pacWorld) {
         for (int x = 0; x < pacWorld.getGrid().getNumRows(); x++) {
             for (int y = 0; y < pacWorld.getGrid().getNumCols(); y++) {
                 Location l = new Location(x, y);
@@ -97,5 +99,4 @@ public class pacManMain {
             }
         }
     }
-
 }
