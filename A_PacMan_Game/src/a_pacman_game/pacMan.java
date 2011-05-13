@@ -28,7 +28,7 @@ public class pacMan extends Bug implements MovementInterface {
         step("UP");
     }
 
-    public void setNumFlowers() {
+    static void setNumFlowers() {
         numFlowers++;
     }
 
