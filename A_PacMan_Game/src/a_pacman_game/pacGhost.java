@@ -27,21 +27,21 @@ public abstract class pacGhost extends Bug {
         
     }
     
-    private boolean getPacManLives() {
+    /*private boolean getPacManLives() {
         
-    }
+    }*/
     
-    private boolean checkGameFinished() {
+    /*private boolean checkGameFinished() {
         
-    }
+    }*/
     
     private void moveTowardTarget() {
         
     }
     
-    private boolean eatPacMan() {
+    /*private boolean eatPacMan() {
         
-    }
+    }*/
     
     protected abstract void setTarget();
 }
