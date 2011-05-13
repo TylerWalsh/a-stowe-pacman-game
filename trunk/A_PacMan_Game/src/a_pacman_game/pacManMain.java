@@ -32,7 +32,7 @@ public class pacManMain {
             for (int c = 0; c < pacWorld.getGrid().getNumCols(); c++) {
                 Location l = new Location(r, c);
                 if (pacWorld.getGrid().get(l) == null) {
-                    pacWorld.add(l, new Flower(Color.YELLOW));
+                    pacWorld.add(l, new Bit(Color.YELLOW));
                     pacMan.setNumFlowers();
                 }
             }
