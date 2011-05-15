@@ -1,8 +1,6 @@
 package a_pacman_game;
 
 
-import a_pacman_game.pacGhost;
-import a_pacman_game.pacMan;
 import info.gridworld.grid.Location;
 import java.awt.Color;
 
