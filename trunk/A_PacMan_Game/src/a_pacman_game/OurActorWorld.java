@@ -33,7 +33,8 @@ public class OurActorWorld extends ActorWorld {
      */
     @Override
     public boolean locationClicked(Location loc) {
-        return true;
+        //TODO: set to true
+        return false;
     }
 
     /**
