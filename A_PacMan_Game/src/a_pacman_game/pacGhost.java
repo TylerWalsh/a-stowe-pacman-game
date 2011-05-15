@@ -9,6 +9,7 @@ import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+import java.util.ArrayList;
 
 /**
  *
@@ -145,6 +146,34 @@ public abstract class pacGhost extends Bug {
         } else {
             return false;
         }
+    }
+    
+    private ArrayList<Location> getPath(int dir) {
+       ArrayList<Location> path = new ArrayList<Location>();
+       ArrayList<Location> tempPath = new ArrayList<Location>();
+       Location here = getLocation();
+       if (here.equals(target))
+           return path;
+       else if (isIntersection(here)) {
+           ArrayList<Location> subpath = new ArrayList<Location>();
+           for (int x = 0; x < 4; x++) {
+               if (x == 0)
+                   subpath = getPath(Location.NORTH);
+               else if (x == 1) {
+                   tempPath = getPath(Location.EAST);
+                   subpath = shorter(subpath, tempPath);
+               } else if (x == 2) {
+                   tempPath = getPath(Location.SOUTH);
+                   subpath = shorter(subpath, tempPath);
+               } else if (x == 3) {
+                   tempPath = getPath(Location.WEST);
+                   subpath = shorter(subpath, tempPath);
+               }
+           }
+           return path;
+       } else {
+           path = getPath(dir);
+       }
     }
     
     protected abstract void setTarget(String mode);
