@@ -4,7 +4,6 @@
  */
 package a_pacman_game;
 
-import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 import info.gridworld.world.World;
@@ -24,12 +23,12 @@ public class pacManMain {
         OurActorWorld pacWorld = new OurActorWorld();
         pacMan pacman = new pacMan();
         pacWorld.add(new Location(11, 9), pacman);
-        
+        pacWorld.add(new Location(9, 9), new Pinky());
         /*
          * these two ghosts are work in progresses -jesse wang
          * pacWorld.add(new Location(7, 9), new Blinky());
         pacWorld.add(new Location(9, 8), new Pinky());*/
-        
+
         pacWorld.show();
         makeBounds(pacWorld);
         //add all other actors FIRST, otherwise you will get
