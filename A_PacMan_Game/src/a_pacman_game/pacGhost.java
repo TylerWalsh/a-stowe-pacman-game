@@ -17,7 +17,11 @@ import java.awt.Color;
  */
 public abstract class pacGhost extends Bug {
     
+    // don't change ghost direction!
+    // rounding corners
+    
     private int step = 0;
+    private boolean isDot = true;
     protected Location target = null;
     protected String mode = null;
     protected final String CHASE = "CHASE";
@@ -27,9 +31,6 @@ public abstract class pacGhost extends Bug {
         setMode(step);
         setTarget(mode);
         moveTowardTarget(target);
-        if (checkPacMan()) {
-            
-        }
         step++;
     }
     
@@ -98,12 +99,9 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         Location here = getLocation();
         Actor nextActor = (Actor) gr.get(loc);
-        int dir = here.getDirectionToward(loc);
+        int dir = here.getDirectionToward(loc);       
         if (nextActor == null || nextActor instanceof Bit) {
-            //setBits(loc);
-            //setBitLocs(loc);
             moveTo(loc);
-            //replacePrevBit();
             setDirection(dir);
             return true;
         }
@@ -144,5 +142,12 @@ public abstract class pacGhost extends Bug {
             return false;
         Location nextLoc = here.getAdjacentLocation(Location.EAST);
         return move(nextLoc);
+    }
+    
+    private void setBit(Location loc) {
+        
+        if (isDot) {
+            
+        }
     }
 }
