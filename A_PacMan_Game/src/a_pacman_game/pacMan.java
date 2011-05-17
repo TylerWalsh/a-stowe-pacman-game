@@ -26,6 +26,7 @@ public class pacMan extends Bug implements MovementInterface {
         super(Color.YELLOW);
         setDirection(Location.EAST);
         numFlowers = 0;
+        pacManLocation = getLocation();
     }
 
     public void step() {
