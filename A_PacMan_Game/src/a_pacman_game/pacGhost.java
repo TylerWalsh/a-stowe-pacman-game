@@ -18,7 +18,6 @@ import java.awt.Color;
 public abstract class pacGhost extends Bug {
     
     private int step = 0;
-    private Location dotLoc = null, prevDotLoc = null;
     protected Location target = null;
     protected String mode = null;
     protected final String CHASE = "CHASE";
@@ -28,6 +27,9 @@ public abstract class pacGhost extends Bug {
         setMode(step);
         setTarget(mode);
         moveTowardTarget(target);
+        if (checkPacMan()) {
+            
+        }
         step++;
     }
     
@@ -142,29 +144,5 @@ public abstract class pacGhost extends Bug {
             return false;
         Location nextLoc = here.getAdjacentLocation(Location.EAST);
         return move(nextLoc);
-    }  
-    
-    private void setBitLocs(Location loc) {
-        Grid gr = getGrid();
-        Actor actor = (Actor) gr.get(loc);
-        if (actor instanceof Bit) {
-            prevDotLoc = dotLoc;
-            dotLoc = loc;
-        }
-    }
-    
-    private void replacePrevBit() {
-        Grid gr = getGrid();
-        if (prevDotLoc != null)
-            gr.put(prevDotLoc, new Bit(Color.yellow));
-    }
-    
-    private void setBits(Location loc) {
-        Grid gr = getGrid();
-        Actor actor = (Actor) gr.get(loc);
-        if (actor instanceof Bit) {
-            gr.put(dotLoc, new Bit(Color.yellow));
-            dotLoc = loc;
-        }
     }
 }
