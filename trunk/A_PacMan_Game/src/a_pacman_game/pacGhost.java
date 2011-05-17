@@ -4,8 +4,6 @@
  */
 package a_pacman_game;
 
-import a_pacman_game.Bit;
-import a_pacman_game.pacMan;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
@@ -21,25 +19,18 @@ public abstract class pacGhost extends Bug {
     // rounding corners
     
     private int step = 0;
-    private boolean isDot = true;
+    protected int dir = Location.NORTH;
     protected Location target = null;
     protected String mode = null;
     protected final String CHASE = "CHASE";
     protected final String SCATTER = "SCATTER";
 
+    @Override
     public void act() {
         setMode(step);
         setTarget(mode);
         moveTowardTarget(target);
         step++;
-    }
-    
-    public Location getTarget() {
-        return target;
-    }
-     
-    public int getDirectionTowardTarget() {
-        return getLocation().getDirectionToward(target);
     }
     
     private void setMode(int step) {
@@ -102,14 +93,13 @@ public abstract class pacGhost extends Bug {
         int dir = here.getDirectionToward(loc);       
         if (nextActor == null || nextActor instanceof Bit) {
             moveTo(loc);
-            setDirection(dir);
+            this.dir = dir;
             return true;
         }
         return false;
     }
     
     private boolean moveUp() {
-        int dir = getDirection();
         Location here = getLocation();
         if (dir == Location.SOUTH)
             return false;
@@ -118,7 +108,6 @@ public abstract class pacGhost extends Bug {
     }
     
     private boolean moveLeft() {
-        int dir = getDirection();
         Location here = getLocation();
         if (dir == Location.EAST)
             return false;
@@ -127,7 +116,6 @@ public abstract class pacGhost extends Bug {
     }
     
     private boolean moveDown() {
-        int dir = getDirection();
         Location here = getLocation();
         if (dir == Location.NORTH)
             return false;
@@ -136,7 +124,6 @@ public abstract class pacGhost extends Bug {
     }
     
     private boolean moveRight() {
-        int dir = getDirection();
         Location here = getLocation();
         if (dir == Location.WEST)
             return false;
@@ -144,10 +131,4 @@ public abstract class pacGhost extends Bug {
         return move(nextLoc);
     }
     
-    private void setBit(Location loc) {
-        
-        if (isDot) {
-            
-        }
-    }
 }

@@ -18,7 +18,8 @@ import java.awt.Color;
 public class Blinky extends pacGhost {
     public Blinky() {
         setColor(Color.red);
-        setDirection(Location.WEST);
+        setDirection(Location.EAST);
+        dir = Location.WEST;
     }
     
     protected void setTarget(String mode) {
