@@ -30,6 +30,7 @@ public class pacManMain {
         //this area(Location(7,9)
         pacWorld.add(new Location(7, 9), new Blinky());
         pacWorld.add(new Location(7, 10), new Pinky());
+        pacWorld.add(new Location(7, 11), new Clyde());
         /*
          * these two ghosts are work in progresses -jesse wang
          * pacWorld.add(new Location(7, 9), new Blinky());
