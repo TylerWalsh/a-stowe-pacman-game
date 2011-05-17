@@ -21,7 +21,8 @@ public class Pinky extends pacGhost {
     private int step;
     
     public Pinky() {
-        setDirection(Location.NORTH);
+        setDirection(Location.EAST);
+        dir = Location.NORTH;
         setColor(Color.pink);
         step = 0;
     }
