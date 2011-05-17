@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package a_pacman_game;
+package a_pacman_game.ghosts;
 
+import a_pacman_game.Bit;
+import a_pacman_game.pacMan;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
