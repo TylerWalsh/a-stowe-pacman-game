@@ -139,19 +139,10 @@ public abstract class pacGhost extends Bug {
     }  
     
     private void setBitLocs(Location loc) {
-        Grid gr = getGrid();
-        if (gr.get(loc) instanceof Bit) {
-            prevDotLoc = dotLoc;
-            dotLoc = loc;
-        } else {
-            dotLoc = null;
-        }
+        
     }
     
     private void replacePrevBit() {
-        Grid gr = getGrid();
-        if (prevDotLoc != null) {
-            gr.put(prevDotLoc, new Bit(Color.yellow));
-        }
+        
     }
 }
