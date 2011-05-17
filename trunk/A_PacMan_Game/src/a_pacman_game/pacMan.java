@@ -29,18 +29,32 @@ public class pacMan extends Bug implements MovementInterface {
         pacManLocation = getLocation();
     }
 
+    /**
+     * This is just for my sanity... mostly for testing purposes.
+     */
     public void step() {
         step("UP");
     }
 
+    /**
+     * gets a count of all flowers in the grid
+     */
     static void setNumFlowers() {
         numFlowers++;
     }
 
+    /**
+     * gives the number of flowers remaining
+     * @return 
+     */
     static int getNumFlowers() {
         return numFlowers;
     }
 
+    /**
+     * turns pac man
+     * @param direction 
+     */
     public void step(String direction) {
         if (direction.equalsIgnoreCase("UP")) {
             setDirection(Location.NORTH);
@@ -53,6 +67,9 @@ public class pacMan extends Bug implements MovementInterface {
         }
     }
 
+    /**
+     * this moves pac man
+     */
     @Override
     public void act() {
         if (isCleared()) {
@@ -72,16 +89,24 @@ public class pacMan extends Bug implements MovementInterface {
             moveTo(new Location(9, 0));
         } else if (getLocation().equals(new Location(9, 0))) {
             moveTo(new Location(9, 18));
-        } else if (getLocation().equals(new Location(9, 18))){
+        } else if (getLocation().equals(new Location(9, 18))) {
             moveTo(new Location(9, 0));
         }
         pacManLocation = getLocation();
     }
 
+    /**
+     * allows the ghosts to get pac man's location
+     * @return 
+     */
     static Location getPacManLoc() {
         return pacManLocation;
     }
 
+    /**
+     * checks if the game is cleared
+     * @return 
+     */
     private boolean isCleared() {
         if (numFlowers == 0) {
             return true;
