@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class pacMan extends Bug implements MovementInterface {
 
     private static int numFlowers;
+    private static Location pacManLocation = null;
 
     /**
      * constuctor makes a yellow pacman
@@ -66,9 +67,18 @@ public class pacMan extends Bug implements MovementInterface {
             }
         } else if (getLocation().equals(new Location(9, 0))) {
             moveTo(new Location(9, 18));
+        } else if (getLocation().equals(new Location(9, 18))) {
+            moveTo(new Location(9, 0));
+        } else if (getLocation().equals(new Location(9, 0))) {
+            moveTo(new Location(9, 18));
         } else if (getLocation().equals(new Location(9, 18))){
             moveTo(new Location(9, 0));
         }
+        pacManLocation = getLocation();
+    }
+
+    static Location getPacManLoc() {
+        return pacManLocation;
     }
 
     private boolean isCleared() {
