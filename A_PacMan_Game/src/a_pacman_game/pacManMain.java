@@ -4,6 +4,8 @@
  */
 package a_pacman_game;
 
+import a_pacman_game.ghosts.Pinky;
+import a_pacman_game.ghosts.Blinky;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 import info.gridworld.world.World;
