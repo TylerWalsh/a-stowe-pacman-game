@@ -17,7 +17,8 @@ import javax.swing.JOptionPane;
 public class pacMan extends Bug implements MovementInterface {
 
     private static int numFlowers;
-    private static Location pacManLocation = null;
+    private static Location pacManLocation = new Location(11, 9);
+    private static int pacManDirection = 0;
 
     /**
      * constuctor makes a yellow pacman
@@ -27,6 +28,7 @@ public class pacMan extends Bug implements MovementInterface {
         setDirection(Location.EAST);
         numFlowers = 0;
         pacManLocation = getLocation();
+        pacManDirection = getDirection();
     }
 
     /**
@@ -101,6 +103,14 @@ public class pacMan extends Bug implements MovementInterface {
      */
     static Location getPacManLoc() {
         return pacManLocation;
+    }
+    
+    /**
+     * allows inky to see pac man's direction
+     * @return 
+     */
+    static int getPacManDir(){
+        return pacManDirection;
     }
 
     /**
