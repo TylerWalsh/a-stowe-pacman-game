@@ -1,7 +1,7 @@
-package a_pacman_game.ghosts;
+package a_pacman_game;
 
 
-import a_pacman_game.ghosts.pacGhost;
+import a_pacman_game.pacGhost;
 import a_pacman_game.pacMan;
 import info.gridworld.actor.Actor;
 import info.gridworld.grid.Grid;

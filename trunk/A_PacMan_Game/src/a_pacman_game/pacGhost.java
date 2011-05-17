@@ -4,6 +4,8 @@
  */
 package a_pacman_game;
 
+import a_pacman_game.Bit;
+import a_pacman_game.pacMan;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
@@ -16,8 +18,7 @@ import info.gridworld.grid.Location;
 public abstract class pacGhost extends Bug {
     
     // don't change ghost direction!
-    // rounding corners...don't leave space
-    // after three calls to act(), move ghosts out of ghost house
+    // rounding corners
     
     private int step = 0;
     private boolean isDot = true;
