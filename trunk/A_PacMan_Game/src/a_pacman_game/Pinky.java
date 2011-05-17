@@ -24,12 +24,15 @@ public class Pinky extends pacGhost {
         step = 0;
     }
     
-    private Location getFourthTile(Location start) {
-        int dir = getGrid().get(start).getDirection();
-        for (int x = 0; x < 4; x++) {
-            target = getGrid().get(start).getLocation().getAdjacentLocation(dir);
+    private Location getFourthTile() {
+        Grid gr = getGrid();
+        pacMan pacMan = getPacMan();
+        Location pacManLoc = pacMan.getLocation();
+        int dir = pacMan.getDirection();
+        for (int x = 0; x < 5; x++) {
+            pacManLoc = pacManLoc.getAdjacentLocation(dir);
         }
-        return target;
+        return pacManLoc;
     }
     
     private boolean inHouse() {
@@ -48,13 +51,10 @@ public class Pinky extends pacGhost {
     
     protected void setTarget(String mode) {
         Grid<Actor> gr = getGrid();
-        if (inHouse())
+        //if (inHouse())
         if (mode.equals(CHASE)) {
             for (Location loc : gr.getOccupiedLocations()) {
-                Actor actor = gr.get(loc);
-                if(actor instanceof pacMan) {
-                    target = getFourthTile(loc);
-                }
+                target = getFourthTile();
             }
         } else if (mode.equals(SCATTER)) {
             target = new Location(0, 0);

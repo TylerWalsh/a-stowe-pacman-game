@@ -25,7 +25,7 @@ public class pacManMain {
         pacWorld.add(new Location(11, 9), pacman);
         
         pacWorld.add(new Location(7, 9), new Blinky());
-        //pacWorld.add(new Location(9, 8), new Pinky()); 
+        pacWorld.add(new Location(7, 10), new Pinky()); 
         /*
          * these two ghosts are work in progresses -jesse wang
          * pacWorld.add(new Location(7, 9), new Blinky());
