@@ -93,17 +93,13 @@ public abstract class pacGhost extends Bug {
     }
     
     private boolean move(Location loc) {
-                Grid gr = getGrid();
-
-        if (!gr.isValid(loc)) {
-            throw new IllegalArgumentException("Invalid move location!!!");
-        }
+        Grid gr = getGrid();
         Location here = getLocation();
         Actor nextActor = (Actor) gr.get(loc);
         int dir = here.getDirectionToward(loc);
-        if (nextActor == null || nextActor instanceof Flower) {
+        if (nextActor == null || nextActor instanceof Bit) {
+            //setBits(loc);
             //setBitLocs(loc);
-            System.out.println("Pac Ghost Loc: (" + loc.getRow() + ", " + loc.getCol() + ")");
             moveTo(loc);
             //replacePrevBit();
             setDirection(dir);
@@ -161,5 +157,14 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         if (prevDotLoc != null)
             gr.put(prevDotLoc, new Bit(Color.yellow));
+    }
+    
+    private void setBits(Location loc) {
+        Grid gr = getGrid();
+        Actor actor = (Actor) gr.get(loc);
+        if (actor instanceof Bit) {
+            gr.put(dotLoc, new Bit(Color.yellow));
+            dotLoc = loc;
+        }
     }
 }
