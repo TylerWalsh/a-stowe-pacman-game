@@ -52,6 +52,16 @@ public abstract class pacGhost extends Bug {
      
     protected abstract void setTarget(String mode);
     
+    protected pacMan getPacMan() {
+        Grid<Actor> gr = getGrid();
+        for (Location loc : gr.getOccupiedLocations()) {
+            Actor actor = (Actor) gr.get(loc);
+            if (actor instanceof pacMan)
+                return (pacMan) actor;
+        }
+        return null;
+    }
+    
     private void moveTowardTarget(Location target) {
         Location here = getLocation();
         int dir = here.getDirectionToward(target);
@@ -92,10 +102,10 @@ public abstract class pacGhost extends Bug {
         Actor nextActor = (Actor) gr.get(loc);
         int dir = here.getDirectionToward(loc);
         if (nextActor == null || nextActor instanceof Flower) {
-            setBitLocs(loc);
+            //setBitLocs(loc);
             System.out.println("Pac Ghost Loc: (" + loc.getRow() + ", " + loc.getCol() + ")");
             moveTo(loc);
-            replacePrevBit();
+            //replacePrevBit();
             setDirection(dir);
             return true;
         }
@@ -139,10 +149,17 @@ public abstract class pacGhost extends Bug {
     }  
     
     private void setBitLocs(Location loc) {
-        
+        Grid gr = getGrid();
+        Actor actor = (Actor) gr.get(loc);
+        if (actor instanceof Bit) {
+            prevDotLoc = dotLoc;
+            dotLoc = loc;
+        }
     }
     
     private void replacePrevBit() {
-        
+        Grid gr = getGrid();
+        if (prevDotLoc != null)
+            gr.put(prevDotLoc, new Bit(Color.yellow));
     }
 }
