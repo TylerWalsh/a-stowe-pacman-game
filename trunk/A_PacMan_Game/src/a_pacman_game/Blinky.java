@@ -4,6 +4,8 @@
  */
 package a_pacman_game;
 
+import info.gridworld.actor.Actor;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import java.awt.Color;
 
@@ -18,9 +20,11 @@ public class Blinky extends pacGhost {
     }
     
     protected void setTarget(String mode) {
+        Grid<Actor> gr = getGrid();
         if (mode.equals(CHASE)) {
-            for (Location loc : getGrid().getOccupiedLocations()) {
-                if(getGrid().get(loc) instanceof pacMan) {
+            for (Location loc : gr.getOccupiedLocations()) {
+                Actor actor = (Actor) gr.get(loc);
+                if (actor instanceof pacMan) {
                     target = loc;
                 }
             }
