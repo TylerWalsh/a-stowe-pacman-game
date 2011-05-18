@@ -51,7 +51,7 @@ public abstract class pacGhost extends Bug {
         Location here = getLocation();
         int dirTarget = here.getDirectionToward(target);
         if (dirTarget == Location.NORTH || dirTarget == Location.NORTHWEST) {
-            if (moveUp() || moveLeft() || moveRight() || moveDown() || moveBack(h)) {
+            if (moveUp() || moveLeft() || moveRight() || moveDown() || moveBack()) {
             }
         } else if (dirTarget == Location.NORTHEAST) {
             if (moveUp() || moveRight() || moveLeft() || moveDown() || moveBack()) {
