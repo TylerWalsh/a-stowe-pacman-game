@@ -89,10 +89,6 @@ public class pacMan extends Bug {
             moveTo(new Location(9, 18));
         } else if (getLocation().equals(new Location(9, 18))) {
             moveTo(new Location(9, 0));
-        } else if (getLocation().equals(new Location(9, 0))) {
-            moveTo(new Location(9, 18));
-        } else if (getLocation().equals(new Location(9, 18))) {
-            moveTo(new Location(9, 0));
         }
         pacManLocation = getLocation();
     }
