@@ -74,9 +74,14 @@ public class pacMan extends Bug {
      */
     @Override
     public void act() {
-        if (isCleared()) {
-            JOptionPane.showMessageDialog(null, "You Win!");
-            numFlowers--;
+        if (true) {
+            int again = JOptionPane.showConfirmDialog(null, "You Win! "
+                    + "Play Again?", "You Win!", JOptionPane.YES_NO_OPTION);
+            if (again == JOptionPane.YES_OPTION) {
+                pacManMain.setGame();
+            } else {
+                numFlowers--;
+            }
         } else if (canMove()) {
             if (numFlowers > 0) {
                 if (getGrid().get(getLocation().
@@ -100,12 +105,12 @@ public class pacMan extends Bug {
     static Location getPacManLoc() {
         return pacManLocation;
     }
-    
+
     /**
      * allows inky to see pac man's direction
      * @return 
      */
-    static int getPacManDir(){
+    static int getPacManDir() {
         return pacManDirection;
     }
 
