@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alex Wu
  */
-public class pacMan extends Bug implements MovementInterface {
+public class pacMan extends Bug {
 
     private static int numFlowers;
     private static Location pacManLocation = new Location(11, 9);
