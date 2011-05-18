@@ -18,9 +18,15 @@ public class pacManMain {
     /**
      * @param args the command line arguments
      */
+    static OurActorWorld pacWorld = new OurActorWorld();
+
     public static void main(String[] args) {
         // TODO code application logic here
-        OurActorWorld pacWorld = new OurActorWorld();
+        setGame();
+    }
+
+    public static void setGame() {
+        pacWorld.clear();
         pacMan pacman = new pacMan();
         pacWorld.add(new Location(11, 9), pacman);
         //before we're done, all ghosts except Blinky MUST be added within the
@@ -30,7 +36,6 @@ public class pacManMain {
         pacWorld.add(new Location(7, 9), new Inky());
         pacWorld.add(new Location(7, 8), new Clyde());
         pacWorld.add(new Location(7, 7), new Pinky());
-
         pacWorld.show();
         makeBounds(pacWorld);
         //add all other actors FIRST, otherwise you will get

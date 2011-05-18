@@ -61,4 +61,8 @@ public class OurActorWorld extends ActorWorld {
             return false;
         }
     }
+
+    public void clear() {
+        setGrid(new BoundedGrid<Actor>(21, 19));
+    }
 }
