@@ -16,7 +16,7 @@ public abstract class pacGhost extends Bug {
     @Override
     public void act() {
         String mode = getMode(step);
-        Location target = getTargetLoc (mode);
+        Location target = getTargetLoc(mode);
         moveTowardTarget(target);
         step++;
     }
@@ -51,25 +51,23 @@ public abstract class pacGhost extends Bug {
         Location here = getLocation();
         int dirTarget = here.getDirectionToward(target);
         if (dirTarget == Location.NORTH || dirTarget == Location.NORTHWEST) {
-            if (moveUp() || moveLeft() || moveRight() || moveDown()) {
+            if (moveUp() || moveLeft() || moveRight() || moveDown() || moveBack(h)) {
             }
         } else if (dirTarget == Location.NORTHEAST) {
-            if (moveUp() || moveRight() || moveLeft() || moveDown()) {
+            if (moveUp() || moveRight() || moveLeft() || moveDown() || moveBack()) {
             }
         } else if (dirTarget == Location.EAST) {
-            if (moveRight() || moveUp() || moveDown() || moveLeft()) {
+            if (moveRight() || moveUp() || moveDown() || moveLeft() || moveBack()) {
             }
         } else if (dirTarget == Location.WEST) {
-            if (moveLeft() || moveUp() || moveDown() || moveRight()) {
+            if (moveLeft() || moveUp() || moveDown() || moveRight() || moveBack()) {
             }
         } else if (dirTarget == Location.SOUTH || dirTarget == Location.SOUTHWEST) {
-            if (moveDown() || moveLeft() || moveRight() || moveUp()) {
+            if (moveDown() || moveLeft() || moveRight() || moveUp() || moveBack()) {
             }
         } else if (dirTarget == Location.SOUTHEAST) {
-            if (moveDown() || moveRight() || moveLeft() || moveUp()) {
+            if (moveDown() || moveRight() || moveLeft() || moveUp() || moveBack()) {
             }
-        } else {
-            moveBack();
         }
     }
 
