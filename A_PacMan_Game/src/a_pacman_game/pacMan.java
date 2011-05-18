@@ -9,6 +9,9 @@ import info.gridworld.actor.Flower;
 import info.gridworld.grid.Location;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import info.gridworld.actor.Rock;
+import info.gridworld.grid.Location;
+import info.gridworld.world.World;
 
 /**
  *
@@ -58,13 +61,13 @@ public class pacMan extends Bug {
      * @param direction 
      */
     public void step(String direction) {
-        if (direction.equalsIgnoreCase("UP")) {
+        if (direction.equalsIgnoreCase("UP") && !(getGrid().get(getLocation().getAdjacentLocation(Location.NORTH)) instanceof Rock)) {
             setDirection(Location.NORTH);
-        } else if (direction.equalsIgnoreCase("DOWN")) {
+        } else if (direction.equalsIgnoreCase("DOWN") && !(getGrid().get(getLocation().getAdjacentLocation(Location.SOUTH)) instanceof Rock)) {
             setDirection(Location.SOUTH);
-        } else if (direction.equalsIgnoreCase("RIGHT")) {
+        } else if (direction.equalsIgnoreCase("RIGHT")&& !(getGrid().get(getLocation().getAdjacentLocation(Location.EAST)) instanceof Rock)) {
             setDirection(Location.EAST);
-        } else if (direction.equalsIgnoreCase("LEFT")) {
+        } else if (direction.equalsIgnoreCase("LEFT")&& !(getGrid().get(getLocation().getAdjacentLocation(Location.WEST)) instanceof Rock)) {
             setDirection(Location.WEST);
         }
     }
