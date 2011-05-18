@@ -26,15 +26,10 @@ public class pacManMain {
         //before we're done, all ghosts except Blinky MUST be added within the
         //"ghost house" (Locations (9,8) to (9,10). Blinky should start above
         //this area(Location(7,9)
-        pacWorld.add(new Location(7, 9), new Blinky());
-        pacWorld.add(new Location(7, 10), new Pinky());
-        //pacWorld.add(new Location(7, 11), new Clyde());
-        //pacWorld.add(new Location(7, 11), new Inky());
-        /*
-         * these two ghosts are work in progresses -jesse wang
-         * pacWorld.add(new Location(7, 9), new Blinky());
-         * pacWorld.add(new Location(9, 8), new Pinky());
-         */
+        pacWorld.add(new Location(7, 10), new Blinky());
+        pacWorld.add(new Location(7, 9), new Inky());
+        pacWorld.add(new Location(7, 8), new Clyde());
+        pacWorld.add(new Location(7, 7), new Pinky());
 
         pacWorld.show();
         makeBounds(pacWorld);
