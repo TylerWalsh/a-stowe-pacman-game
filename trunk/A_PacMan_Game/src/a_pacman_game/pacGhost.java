@@ -6,7 +6,8 @@ import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
 public abstract class pacGhost extends Bug {
-
+    
+    private Location prevLoc = getLocation();
     protected int step = 0;
     protected int direction = Location.NORTH;
     protected final String CHASE = "CHASE";
@@ -46,6 +47,10 @@ public abstract class pacGhost extends Bug {
         }
         return null;
     }
+    
+    private void setPrevLoc() {
+        prevLoc = getLocation();
+    }
 
     private void moveTowardTarget(Location target) {
         Location here = getLocation();
@@ -76,6 +81,7 @@ public abstract class pacGhost extends Bug {
         Location here = getLocation();
         Actor nextActor = (Actor) gr.get(loc);
         if (nextActor == null || nextActor instanceof Bit) {
+            setPrevLoc();
             moveTo(loc);
             direction = here.getDirectionToward(loc);
             return true;
@@ -89,6 +95,8 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.NORTH);
+        if (cross(nextLoc))
+            nextLoc = crossGrid(nextLoc);
         return move(nextLoc);
     }
 
@@ -98,6 +106,8 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.SOUTH);
+        if (cross(nextLoc))
+            nextLoc = crossGrid(nextLoc);
         return move(nextLoc);
     }
 
@@ -107,6 +117,8 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.WEST);
+        if (cross(nextLoc))
+            nextLoc = crossGrid(nextLoc);
         return move(nextLoc);
     }
 
@@ -116,21 +128,29 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.EAST);
+        if (cross(nextLoc))
+            nextLoc = crossGrid(nextLoc);
         return move(nextLoc);
     }
 
     private boolean moveBack() {
-        Location here = getLocation();
-        Location nextLoc = null;
-        if (direction == Location.NORTH) {
-            nextLoc = here.getAdjacentLocation(Location.SOUTH);
-        } else if (direction == Location.SOUTH) {
-            nextLoc = here.getAdjacentLocation(Location.NORTH);
-        } else if (direction == Location.WEST) {
-            nextLoc = here.getAdjacentLocation(Location.WEST);
-        } else if (direction == Location.EAST) {
-            nextLoc = here.getAdjacentLocation(Location.EAST);
+        return move(prevLoc);
+    }
+    
+    private boolean cross(Location loc) {
+        if (loc.equals(new Location(9, -1)) || loc.equals(new Location(9, 19)))
+            return true;
+        else
+            return false;
+    }
+    
+    private Location crossGrid(Location loc) {
+        if (loc.equals(new Location(9, -1))) {
+            return new Location(9, 18);
+        } else if (loc.equals(new Location(9, 19))) {
+            return new Location(9, 0);
+        } else {
+            return null;
         }
-	return move(nextLoc);
     }
 }
