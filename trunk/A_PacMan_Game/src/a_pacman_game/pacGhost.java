@@ -17,7 +17,6 @@ public abstract class pacGhost extends Bug {
     protected final String FRIGHTENED = "FRIGHTENED";
     protected static boolean gameFinished = false;
 
-
     @Override
     public void act() {
         if (!gameFinished) {
@@ -84,7 +83,6 @@ public abstract class pacGhost extends Bug {
 
     private boolean move(Location loc) {
         Grid gr = getGrid();
-        Location here = getLocation();
         Actor nextActor = (Actor) gr.get(loc);
         if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
             setGameFinished(loc);
@@ -92,8 +90,7 @@ public abstract class pacGhost extends Bug {
             setAteBit(nextActor);
             setPrevLoc();
             moveTo(loc);
-            if (!justCrossed(loc))
-                direction = here.getDirectionToward(loc);
+            setDirection(loc);
             return true;
         }
         return false;
@@ -178,19 +175,27 @@ public abstract class pacGhost extends Bug {
             return false;
         }
     }
-    
+
     private void setAteBit(Actor actor) {
-        if (actor instanceof Bit)
+        if (actor instanceof Bit) {
             ateBit = true;
+        }
     }
-    
+
+    private void setDirection(Location loc) {
+
+        if (!justCrossed(loc)) {
+            direction = getLocation().getDirectionToward(loc);
+        }
+    }
+
     private void replaceBit() {
         Grid grid = getGrid();
         if (ateBit) {
             grid.put(prevLoc, new Bit(Color.yellow));
         }
     }
-    
+
     private boolean setGameFinished(Location loc) {
         Location pacManLoc = getPacMan().getLocation();
         if (loc.equals(pacManLoc)) {
@@ -201,5 +206,4 @@ public abstract class pacGhost extends Bug {
             return false;
         }
     }
-    
 }
