@@ -4,22 +4,28 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+import java.awt.Color;
 
 public abstract class pacGhost extends Bug {
-    
+
     private Location prevLoc = getLocation();
+    private boolean ateBit = true;
     protected int step = 0;
     protected int direction = Location.NORTH;
     protected final String CHASE = "CHASE";
     protected final String SCATTER = "SCATTER";
     protected final String FRIGHTENED = "FRIGHTENED";
-    
+    protected static boolean gameFinished = false;
+
+
     @Override
     public void act() {
-        String mode = getMode(step);
-        Location target = getTargetLoc(mode);
-        moveTowardTarget(target);
-        step++;
+        if (!gameFinished) {
+            String mode = getMode(step);
+            Location target = getTargetLoc(mode);
+            moveTowardTarget(target);
+            step++;
+        }
     }
 
     private String getMode(int step) {
@@ -35,8 +41,8 @@ public abstract class pacGhost extends Bug {
         }
     }
 
-    protected abstract Location getTargetLoc (String mode);
-    
+    protected abstract Location getTargetLoc(String mode);
+
     protected pacMan getPacMan() {
         Grid<Actor> grid = getGrid();
         for (Location loc : grid.getOccupiedLocations()) {
@@ -47,7 +53,7 @@ public abstract class pacGhost extends Bug {
         }
         return null;
     }
-    
+
     private void setPrevLoc() {
         prevLoc = getLocation();
     }
@@ -80,10 +86,14 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         Location here = getLocation();
         Actor nextActor = (Actor) gr.get(loc);
-        if (nextActor == null || nextActor instanceof Bit) {
+        if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
+            setGameFinished(loc);
+            replaceBit();
+            setAteBit(nextActor);
             setPrevLoc();
             moveTo(loc);
-            direction = here.getDirectionToward(loc);
+            if (!justCrossed(loc))
+                direction = here.getDirectionToward(loc);
             return true;
         }
         return false;
@@ -95,8 +105,9 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.NORTH);
-        if (cross(nextLoc))
+        if (cross(nextLoc)) {
             nextLoc = crossGrid(nextLoc);
+        }
         return move(nextLoc);
     }
 
@@ -106,8 +117,9 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.SOUTH);
-        if (cross(nextLoc))
+        if (cross(nextLoc)) {
             nextLoc = crossGrid(nextLoc);
+        }
         return move(nextLoc);
     }
 
@@ -117,8 +129,9 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.WEST);
-        if (cross(nextLoc))
+        if (cross(nextLoc)) {
             nextLoc = crossGrid(nextLoc);
+        }
         return move(nextLoc);
     }
 
@@ -128,22 +141,24 @@ public abstract class pacGhost extends Bug {
             return false;
         }
         Location nextLoc = here.getAdjacentLocation(Location.EAST);
-        if (cross(nextLoc))
+        if (cross(nextLoc)) {
             nextLoc = crossGrid(nextLoc);
+        }
         return move(nextLoc);
     }
 
     private boolean moveBack() {
         return move(prevLoc);
     }
-    
+
     private boolean cross(Location loc) {
-        if (loc.equals(new Location(9, -1)) || loc.equals(new Location(9, 19)))
+        if (loc.equals(new Location(9, -1)) || loc.equals(new Location(9, 19))) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-    
+
     private Location crossGrid(Location loc) {
         if (loc.equals(new Location(9, -1))) {
             return new Location(9, 18);
@@ -153,4 +168,38 @@ public abstract class pacGhost extends Bug {
             return null;
         }
     }
+
+    private boolean justCrossed(Location loc) {
+        if (loc.equals(new Location(9, 18)) && prevLoc.equals(new Location(9, 0))) {
+            return true;
+        } else if (loc.equals(new Location(9, 0)) && prevLoc.equals(new Location(9, 18))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void setAteBit(Actor actor) {
+        if (actor instanceof Bit)
+            ateBit = true;
+    }
+    
+    private void replaceBit() {
+        Grid grid = getGrid();
+        if (ateBit) {
+            grid.put(prevLoc, new Bit(Color.yellow));
+        }
+    }
+    
+    private boolean setGameFinished(Location loc) {
+        Location pacManLoc = getPacMan().getLocation();
+        if (loc.equals(pacManLoc)) {
+            gameFinished = true;
+            return true;
+        } else {
+            gameFinished = false;
+            return false;
+        }
+    }
+    
 }
