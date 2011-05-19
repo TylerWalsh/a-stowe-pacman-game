@@ -6,10 +6,11 @@ import java.awt.Color;
 public class Clyde extends pacGhost {
 	private final Location corner = new Location(20, 0);
 	
-	public Clyde() {
+	public Clyde(Location loc) {
 		setColor(Color.orange);
 		setDirection(Location.EAST);
 		direction = Location.NORTH;
+                prevLoc = loc;
 	}
 
 	private int getDistance() {

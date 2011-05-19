@@ -7,10 +7,11 @@ public class Blinky extends pacGhost {
 
     private final Location corner = new Location(0, 18);
 
-    public Blinky() {
+    public Blinky(Location loc) {
         setColor(Color.red);
         setDirection(Location.EAST);
         direction = Location.WEST;
+        prevLoc = loc;
     }
 
     protected Location getTargetLoc (String mode) {

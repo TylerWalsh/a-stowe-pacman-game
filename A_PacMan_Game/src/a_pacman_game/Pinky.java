@@ -7,10 +7,11 @@ public class Pinky extends pacGhost {
 
     private final Location corner = new Location(0, 0);
 
-    public Pinky() {
+    public Pinky(Location loc) {
         setColor(Color.pink);
         setDirection(Location.EAST);
         direction = Location.NORTH;
+        prevLoc = loc;
     }
 
     private Location getFourthTile() {
