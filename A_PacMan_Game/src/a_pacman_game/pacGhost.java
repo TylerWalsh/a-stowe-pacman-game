@@ -5,6 +5,7 @@ import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  * The pacGhost class contains attributes and methods common to all the ghosts
@@ -55,14 +56,14 @@ public abstract class pacGhost extends Bug {
             return null;
         }
     }
-    
+
     /**
      * Set target location.
      * @param mode Movement mode
      * @return target location
      */
     protected abstract Location getTargetLoc(String mode);
-    
+
     /**
      * Get pacMan.
      * @return pacMan
@@ -77,7 +78,7 @@ public abstract class pacGhost extends Bug {
         }
         return null;
     }
-    
+
     /**
      * Set ghost's current location as the previous location for the next
      * time act() is called.
@@ -85,7 +86,7 @@ public abstract class pacGhost extends Bug {
     private void setPrevLoc() {
         prevLoc = getLocation();
     }
-    
+
     /**
      * Move ghost in direction of the target.
      * @param target target that the ghost is to move towards
@@ -93,7 +94,7 @@ public abstract class pacGhost extends Bug {
     private void moveTowardTarget(Location target) {
         Location here = getLocation();
         int dirTarget = here.getDirectionToward(target);
-        
+
         // Movement is based on the ghost's direction toward the target.
         if (dirTarget == Location.NORTH || dirTarget == Location.NORTHWEST) {
             if (moveUp() || moveLeft() || moveRight() || moveDown() || moveBack()) {
@@ -115,7 +116,7 @@ public abstract class pacGhost extends Bug {
             }
         }
     }
-    
+
     /**
      * Move to the specified location, if possible, while determining the 
      * state of the game (finished or not finished), replacing bits, and
@@ -127,20 +128,19 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         Actor nextActor = (Actor) gr.get(loc);
         if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
-            //setGameFinished(loc);
-            //replaceBit();
+            setGameFinished(loc);
             setAteBit(nextActor);
             setPrevLoc();
-            if(ateBit){
-                replaceBit();
-            }
             setDirection(loc);
             moveTo(loc);
+            if (ateBit) {
+                replaceBit();
+            }
             return true;
         }
         return false;
     }
-    
+
     /**
      * Move to location above the ghost.
      * @return true - ghost successfully moved; false - ghost did not move
@@ -156,7 +156,7 @@ public abstract class pacGhost extends Bug {
         }
         return move(nextLoc);
     }
-    
+
     /**
      * Move to location below the ghost.
      * @return true - ghost successfully moved; false - ghost did not move
@@ -172,7 +172,7 @@ public abstract class pacGhost extends Bug {
         }
         return move(nextLoc);
     }
-    
+
     /**
      * Move to location left of the ghost.
      * @return true - ghost successfully moved; false - ghost did not move
@@ -188,7 +188,7 @@ public abstract class pacGhost extends Bug {
         }
         return move(nextLoc);
     }
-    
+
     /**
      * Move to location right of the ghost.
      * @return true - ghost successfully moved; false - ghost did not move
@@ -204,7 +204,7 @@ public abstract class pacGhost extends Bug {
         }
         return move(nextLoc);
     }
-    
+
     /**
      * Move to previous location.
      * @return true - ghost successfully moved; false - ghost did not move
@@ -212,7 +212,7 @@ public abstract class pacGhost extends Bug {
     private boolean moveBack() {
         return move(prevLoc);
     }
-    
+
     /**
      * Check whether ghost will cross the grid.
      * @param loc ghost's target location
@@ -225,7 +225,7 @@ public abstract class pacGhost extends Bug {
             return false;
         }
     }
-    
+
     /**
      * Transport ghost across the grid to give the appearance that it moved
      * across and circled back into view.
@@ -241,7 +241,7 @@ public abstract class pacGhost extends Bug {
             return null;
         }
     }
-    
+
     /**
      * Check whether ghost just crossed the grid.
      * @param loc ghost's current location
@@ -256,7 +256,7 @@ public abstract class pacGhost extends Bug {
             return false;
         }
     }
-    
+
     /**
      * Set the value of ateBit.
      * @param actor to be determined whether actor is a bit
@@ -268,7 +268,7 @@ public abstract class pacGhost extends Bug {
             ateBit = false;
         }
     }
-    
+
     /**
      * Set the ghost's direction without physically turning the ghost.
      * @param loc next location for ghost to move into
@@ -280,7 +280,7 @@ public abstract class pacGhost extends Bug {
             direction = getLocation().getDirectionToward(loc);
         }
     }
-    
+
     /**
      * Replace the bit that the ghost temporarily removed. Ghosts do not
      * eat bits.
@@ -292,7 +292,7 @@ public abstract class pacGhost extends Bug {
             myBit.putSelfInGrid(grid, prevLoc);
         }
     }
-    
+
     /**
      * Set the status of the game (finished or not finished).
      * @param loc next location for ghost to move into
@@ -300,6 +300,10 @@ public abstract class pacGhost extends Bug {
     private void setGameFinished(Location loc) {
         Location pacManLoc = getPacMan().getLocation();
         if (loc.equals(pacManLoc)) {
+            if (OurActorWorld.playAgainDialog("You Lose!")
+                    == JOptionPane.YES_OPTION) {
+                pacManMain.setGame();
+            }
             gameFinished = true;
         } else {
             gameFinished = false;
