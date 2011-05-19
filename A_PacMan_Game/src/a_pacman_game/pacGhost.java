@@ -127,15 +127,15 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         Actor nextActor = (Actor) gr.get(loc);
         if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
-            setGameFinished(loc);
+            //setGameFinished(loc);
             //replaceBit();
             setAteBit(nextActor);
             setPrevLoc();
-            moveTo(loc);
             if(ateBit){
                 replaceBit();
             }
             setDirection(loc);
+            moveTo(loc);
             return true;
         }
         return false;
