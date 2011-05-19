@@ -24,9 +24,13 @@ public class pacManMain {
         // TODO code application logic here
         setGame();
     }
+    
+    public static void clearGame(){
+        pacWorld.clear();
+    }
 
     public static void setGame() {
-        pacWorld.clear();
+        clearGame();
         pacMan pacman = new pacMan();
         pacWorld.add(new Location(11, 9), pacman);
         //before we're done, all ghosts except Blinky MUST be added within the

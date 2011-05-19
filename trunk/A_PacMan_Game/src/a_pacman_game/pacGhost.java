@@ -31,11 +31,16 @@ public abstract class pacGhost extends Bug {
 
     @Override
     public void act() {
+        setGameFinished();
         if (!gameFinished) {
             String mode = getMode(step);
             Location target = getTargetLoc(mode);
             moveTowardTarget(target);
             step++;
+        } else {
+            if(OurActorWorld.playAgainDialog("You Lose.")){
+                gameFinished = false;
+            }
         }
     }
 
@@ -128,7 +133,6 @@ public abstract class pacGhost extends Bug {
         Grid gr = getGrid();
         Actor nextActor = (Actor) gr.get(loc);
         if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
-            setGameFinished(loc);
             setAteBit(nextActor);
             setPrevLoc();
             setDirection(loc);
@@ -297,16 +301,9 @@ public abstract class pacGhost extends Bug {
      * Set the status of the game (finished or not finished).
      * @param loc next location for ghost to move into
      */
-    private void setGameFinished(Location loc) {
-        Location pacManLoc = getPacMan().getLocation();
-        if (loc.equals(pacManLoc)) {
-            if (OurActorWorld.playAgainDialog("You Lose!")
-                    == JOptionPane.YES_OPTION) {
-                pacManMain.setGame();
-            }
+    private void setGameFinished() {
+        if (getPacMan() == null) {
             gameFinished = true;
-        } else {
-            gameFinished = false;
         }
     }
 }
