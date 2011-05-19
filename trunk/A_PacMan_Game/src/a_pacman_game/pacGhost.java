@@ -129,9 +129,12 @@ public abstract class pacGhost extends Bug {
         if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
             setGameFinished(loc);
             //replaceBit();
-            //setAteBit(nextActor);
+            setAteBit(nextActor);
             setPrevLoc();
             moveTo(loc);
+            if(ateBit){
+                replaceBit();
+            }
             setDirection(loc);
             return true;
         }
@@ -285,7 +288,8 @@ public abstract class pacGhost extends Bug {
     private void replaceBit() {
         Grid grid = getGrid();
         if (ateBit) {
-            grid.put(prevLoc, new Bit(Color.yellow));
+            Bit myBit = new Bit(Color.yellow);
+            myBit.putSelfInGrid(grid, prevLoc);
         }
     }
     
