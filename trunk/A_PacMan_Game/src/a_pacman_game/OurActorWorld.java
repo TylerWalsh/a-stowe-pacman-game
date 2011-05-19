@@ -8,6 +8,7 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,6 +61,15 @@ public class OurActorWorld extends ActorWorld {
         } else {
             return false;
         }
+    }
+
+    /**
+     * asks the user if they wish to replay the game.
+     * @return 
+     */
+    static int playAgainDialog(String message) {
+        return JOptionPane.showConfirmDialog(null, message
+                + " Play Again?", message, JOptionPane.YES_NO_OPTION);
     }
 
     public void clear() {

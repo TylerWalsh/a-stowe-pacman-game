@@ -6,12 +6,10 @@ package a_pacman_game;
 
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
-import info.gridworld.grid.Location;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
-import info.gridworld.world.World;
 
 /**
  *
@@ -65,9 +63,9 @@ public class pacMan extends Bug {
             setDirection(Location.NORTH);
         } else if (direction.equalsIgnoreCase("DOWN") && !(getGrid().get(getLocation().getAdjacentLocation(Location.SOUTH)) instanceof Rock)) {
             setDirection(Location.SOUTH);
-        } else if (direction.equalsIgnoreCase("RIGHT")&& !(getGrid().get(getLocation().getAdjacentLocation(Location.EAST)) instanceof Rock)) {
+        } else if (direction.equalsIgnoreCase("RIGHT") && !(getGrid().get(getLocation().getAdjacentLocation(Location.EAST)) instanceof Rock)) {
             setDirection(Location.EAST);
-        } else if (direction.equalsIgnoreCase("LEFT")&& !(getGrid().get(getLocation().getAdjacentLocation(Location.WEST)) instanceof Rock)) {
+        } else if (direction.equalsIgnoreCase("LEFT") && !(getGrid().get(getLocation().getAdjacentLocation(Location.WEST)) instanceof Rock)) {
             setDirection(Location.WEST);
         }
     }
@@ -77,10 +75,9 @@ public class pacMan extends Bug {
      */
     @Override
     public void act() {
-        if (true) {
-            int again = JOptionPane.showConfirmDialog(null, "You Win! "
-                    + "Play Again?", "You Win!", JOptionPane.YES_NO_OPTION);
-            if (again == JOptionPane.YES_OPTION) {
+        if (isCleared()) {
+            if (OurActorWorld.playAgainDialog("You Win!")
+                    == JOptionPane.YES_OPTION) {
                 pacManMain.setGame();
             } else {
                 numFlowers--;
