@@ -7,7 +7,6 @@ package a_pacman_game;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 
@@ -76,11 +75,8 @@ public class pacMan extends Bug {
     @Override
     public void act() {
         if (isCleared()) {
-            if (OurActorWorld.playAgainDialog("You Win!")
-                    == JOptionPane.YES_OPTION) {
-                pacManMain.setGame();
-            } else {
-                numFlowers--;
+            if (OurActorWorld.playAgainDialog("You Win!")) {
+                numFlowers = 0;
             }
         } else if (canMove()) {
             if (numFlowers > 0) {

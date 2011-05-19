@@ -67,12 +67,20 @@ public class OurActorWorld extends ActorWorld {
      * asks the user if they wish to replay the game.
      * @return 
      */
-    static int playAgainDialog(String message) {
-        return JOptionPane.showConfirmDialog(null, message
-                + " Play Again?", message, JOptionPane.YES_NO_OPTION);
+    static boolean playAgainDialog(String message) {
+        if (JOptionPane.showConfirmDialog(null, message
+                + " Play Again?", message, JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION) {
+            pacManMain.setGame();
+            return true;
+        }
+        pacManMain.clearGame();
+        return false;
     }
 
     public void clear() {
-        setGrid(new BoundedGrid<Actor>(21, 19));
+        for (Location l : getGrid().getOccupiedLocations()) {
+            getGrid().get(l).removeSelfFromGrid();
+        }
     }
 }
