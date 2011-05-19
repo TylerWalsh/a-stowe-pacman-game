@@ -8,10 +8,11 @@ import java.awt.Color;
 public class Inky extends pacGhost {
 	private final Location corner = new Location(20, 18);
 	
-	public Inky() {
+	public Inky(Location loc) {
 		setColor(Color.blue);
 		setDirection(Location.EAST);
 		direction = Location.NORTH;
+                prevLoc = loc;
 	}
 
 	private int getDistance() {
