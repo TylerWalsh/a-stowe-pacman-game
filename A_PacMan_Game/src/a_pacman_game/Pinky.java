@@ -25,6 +25,9 @@ public class Pinky extends pacGhost {
     }
 
     protected Location getTargetLoc(String mode) {
+        if (step == 8) {
+            moveTo(new Location(7, 9));
+        }
         if (mode.equals(CHASE)) {
             return getFourthTile();
         } else if (mode.equals(SCATTER)) {
