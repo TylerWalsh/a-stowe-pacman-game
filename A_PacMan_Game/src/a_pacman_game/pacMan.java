@@ -115,7 +115,7 @@ public class pacMan extends Bug {
      * @return 
      */
     private boolean isCleared() {
-        if (numFlowers == 0) {
+        if (numFlowers == 1) {
             return true;
         }
         return false;
