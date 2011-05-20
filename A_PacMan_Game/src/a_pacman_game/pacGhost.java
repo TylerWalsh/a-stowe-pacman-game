@@ -30,17 +30,17 @@ public abstract class pacGhost extends Bug {
 
     @Override
     public void act() {
+        setGameFinished();
         if (!gameFinished) {
             String mode = getMode(step);
             Location target = getTargetLoc(mode);
             moveTowardTarget(target);
             step++;
         } else {
-            if(OurActorWorld.playAgainDialog("You Lose.")){
+            if (OurActorWorld.playAgainDialog("You Lose.")) {
                 gameFinished = false;
             }
         }
-        setGameFinished();
     }
 
     /**
