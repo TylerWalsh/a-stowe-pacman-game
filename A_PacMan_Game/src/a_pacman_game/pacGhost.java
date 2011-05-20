@@ -30,7 +30,6 @@ public abstract class pacGhost extends Bug {
 
     @Override
     public void act() {
-        setGameFinished();
         if (!gameFinished) {
             String mode = getMode(step);
             Location target = getTargetLoc(mode);
@@ -41,6 +40,7 @@ public abstract class pacGhost extends Bug {
                 gameFinished = false;
             }
         }
+        setGameFinished();
     }
 
     /**
