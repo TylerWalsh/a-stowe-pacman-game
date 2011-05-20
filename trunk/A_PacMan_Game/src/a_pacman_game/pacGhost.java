@@ -131,7 +131,8 @@ public abstract class pacGhost extends Bug {
     private boolean move(Location loc) {
         Grid gr = getGrid();
         Actor nextActor = (Actor) gr.get(loc);
-        if (nextActor == null || nextActor instanceof Bit || nextActor instanceof pacMan) {
+        if (nextActor == null || nextActor instanceof Bit
+                || nextActor instanceof pacMan) {
             setAteBit(nextActor);
             setPrevLoc();
             setDirection(loc);
