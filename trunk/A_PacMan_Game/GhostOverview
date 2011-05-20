@@ -1,0 +1,4 @@
+Red Blinky - targets pacmans location consistently. gives appearance of following pacman
+pink pinky - targets four squares in front of pacman. gives apperance of trying to cut pacman off
+blue inky - targets 2 squares infront of pacman. finds blinkys distance to that target and doubles it and moves there 
+orange clyde - if distance is greater than 8 you move towards pacman. less than 8 move to nearest corner
