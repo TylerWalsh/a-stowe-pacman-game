@@ -1,0 +1,17 @@
+1) Given our reduced amount of time we believe we should receive 15 points. We needed the maximum 
+amount of days to complete the game. Our members have also spent quite a significant amount of time outside of class 
+working on the game. 
+2) We were able to nearly recreate a timeless classic within one week. Our game is simple to play and 
+simple in interface. The behavior of Pac-man and the ghosts are what you'd expect in the original arcade.
+There is no special bold bit that allows Pac-man to eat the ghosts. This makes our game different from 
+the arcade Pac-man in that it is harder to win. 
+3) Yes the game completely works. 
+4) The game was designed with classes inherited from GridWorld code. The game board was created on the 
+Gridworld grid. Pac-man extends the Bug class which eats the yellow bits which extends the Flower class. 
+Rock objects of the Rock class act as borders for the game. Each individual ghost extends a universal pacGhost
+class which handles similar behavior of each ghost. The pacGhost class extends the Bug class. This design 
+allowed us to create the game in a timely fashion and therefore a good design. 
+5) Alex - I initially wanted to develop Pac-man's behaviors in the pacMan class and the yellow Bits. However
+due to AP exams and my absences I was not able to contribute as much to the project as I had initially 
+wanted to. Nevertheless I was still able to test the game and fix small bugs. I think I deserve 10 points.
+
