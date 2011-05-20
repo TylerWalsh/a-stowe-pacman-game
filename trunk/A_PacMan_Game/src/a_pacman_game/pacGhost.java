@@ -5,7 +5,6 @@ import info.gridworld.actor.Bug;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  * The pacGhost class contains attributes and methods common to all the ghosts
